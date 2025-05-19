@@ -2,12 +2,16 @@ package co.duvan.springcloud.cursos.controllers;
 
 import co.duvan.springcloud.cursos.entities.Curso;
 import co.duvan.springcloud.cursos.services.CursoServices;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -41,7 +45,11 @@ public class CursoController {
 
     //*Create
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Curso curso) {
+    public ResponseEntity<?> create(@Valid @RequestBody Curso curso, BindingResult result) {
+
+        if (result.hasErrors()) {
+            return validBodyRequest(result);
+        }
 
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(curso));
 
@@ -81,6 +89,19 @@ public class CursoController {
         }
 
         return ResponseEntity.notFound().build();
+
+    }
+
+    //* Method: valid body request
+    public ResponseEntity<?> validBodyRequest(BindingResult result) {
+
+        Map<String, String> errors = new HashMap<>();
+
+        result.getFieldErrors().forEach(error -> {
+            errors.put(error.getField(), " el campo " + error.getField() + " " + error.getDefaultMessage());
+        });
+
+        return ResponseEntity.badRequest().body(errors);
 
     }
 
