@@ -1,6 +1,6 @@
 package co.duvan.springcloud.cursos.services;
 
-import co.duvan.springcloud.cursos.entities.Curso;
+import co.duvan.springcloud.cursos.model.entities.Curso;
 import co.duvan.springcloud.cursos.repositories.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

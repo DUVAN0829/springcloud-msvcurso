@@ -1,6 +1,6 @@
 package co.duvan.springcloud.cursos.services;
 
-import co.duvan.springcloud.cursos.entities.Curso;
+import co.duvan.springcloud.cursos.model.entities.Curso;
 
 import java.util.List;
 import java.util.Optional;

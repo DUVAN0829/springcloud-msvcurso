@@ -1,6 +1,6 @@
 package co.duvan.springcloud.cursos.controllers;
 
-import co.duvan.springcloud.cursos.entities.Curso;
+import co.duvan.springcloud.cursos.model.entities.Curso;
 import co.duvan.springcloud.cursos.services.CursoServices;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
