@@ -16,5 +16,10 @@ public interface CursoServices {
 
     void delete(Long id);
 
-    Optional<User> asignarUser(User user, Long idCurso);
+    Optional<User> asignarUser(User user, Long cursoId); //* Asigna a un usuario existente en el curso
+
+    Optional<User> createUser(User user, Long cursoId); //* Crea un usuario y lo asigna al curso
+
+    Optional<User> deleteUser(User user, Long cursoId); //* Elimina usuario del curso no de la base de datos.
+
 }
