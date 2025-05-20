@@ -20,6 +20,7 @@ public class Curso {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "curso_id")
     private List<CursoUser> cursoUsers;
 
     @Transient

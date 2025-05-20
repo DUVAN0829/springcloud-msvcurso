@@ -1,5 +1,6 @@
 package co.duvan.springcloud.cursos.services;
 
+import co.duvan.springcloud.cursos.model.User;
 import co.duvan.springcloud.cursos.model.entities.Curso;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface CursoServices {
 
     void delete(Long id);
 
+    Optional<User> asignarUser(User user, Long idCurso);
 }

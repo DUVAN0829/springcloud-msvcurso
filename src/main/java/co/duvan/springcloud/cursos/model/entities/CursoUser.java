@@ -14,7 +14,6 @@ public class CursoUser {
     private Long id;
 
     @Column(name = "user_id", unique = true)
-    @JoinColumn(name = "curso_id")
     private Long userId;
 
     //* Getters and Setters

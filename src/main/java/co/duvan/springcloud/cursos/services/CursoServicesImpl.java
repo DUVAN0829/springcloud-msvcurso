@@ -1,5 +1,6 @@
 package co.duvan.springcloud.cursos.services;
 
+import co.duvan.springcloud.cursos.model.User;
 import co.duvan.springcloud.cursos.model.entities.Curso;
 import co.duvan.springcloud.cursos.repositories.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,11 @@ public class CursoServicesImpl implements CursoServices {
     @Transactional
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public Optional<User> asignarUser(User user, Long idCurso) {
+        return Optional.empty();
     }
 
 }
