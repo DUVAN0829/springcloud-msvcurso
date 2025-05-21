@@ -1,7 +1,9 @@
 package co.duvan.springcloud.cursos.controllers;
 
+import co.duvan.springcloud.cursos.model.User;
 import co.duvan.springcloud.cursos.model.entities.Curso;
 import co.duvan.springcloud.cursos.services.CursoServices;
+import feign.FeignException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,10 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class CursoController {
@@ -102,6 +101,71 @@ public class CursoController {
         });
 
         return ResponseEntity.badRequest().body(errors);
+
+    }
+
+    //* Methods MSVC
+
+    //* Asignar user
+    @PutMapping("/asignar-user/${cursoId}")
+    public ResponseEntity<?> asignarUser(@RequestBody User user, @PathVariable Long cursoId) {
+
+        Optional<User> o;
+
+        try {
+            o = service.asignarUser(user, cursoId);
+        } catch (FeignException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("Message", "User not exist by id or communication error " + e.getMessage()));
+        }
+
+        if (o.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(o.get());
+        }
+
+        return ResponseEntity.notFound().build();
+
+    }
+
+    //* Create user
+    @PostMapping("/create-user/${cursoId}")
+    public ResponseEntity<?> createUser(@RequestBody User user, @PathVariable Long cursoId) {
+
+        Optional<User> o;
+
+        try {
+            o = service.createUser(user, cursoId);
+        } catch (FeignException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("Message", "User cannot be created or communication error " + e.getMessage()));
+        }
+
+        if (o.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(o.get());
+        }
+
+        return ResponseEntity.notFound().build();
+
+    }
+
+    //* Delete user
+    @DeleteMapping("/delete-user/${cursoId}")
+    public ResponseEntity<?> deleteUser(@RequestBody User user, @PathVariable Long cursoId) {
+
+        Optional<User> o;
+
+        try {
+            o = service.deleteUser(user, cursoId);
+        } catch (FeignException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Collections.singletonMap("Message", "User not exist by id or communication error " + e.getMessage()));
+        }
+
+        if (o.isPresent()) {
+            return ResponseEntity.status(HttpStatus.OK).body(o.get());
+        }
+
+        return ResponseEntity.notFound().build();
 
     }
 
