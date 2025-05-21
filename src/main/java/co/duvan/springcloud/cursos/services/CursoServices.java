@@ -22,4 +22,6 @@ public interface CursoServices {
 
     Optional<User> deleteUser(User user, Long cursoId); //* Elimina usuario del curso no de la base de datos.
 
+    Optional<Curso> byIdWithUser(Long id);
+
 }

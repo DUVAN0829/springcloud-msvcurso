@@ -32,7 +32,7 @@ public class CursoController {
     @GetMapping("/{id}")
     public ResponseEntity<?> detail(@PathVariable Long id) {
 
-        Optional<Curso> cursoOptional = service.findById(id);
+        Optional<Curso> cursoOptional = service.byIdWithUser(id);
 
         if (cursoOptional.isPresent()) {
             return ResponseEntity.ok(cursoOptional.get());

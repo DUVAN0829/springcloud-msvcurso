@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CursoServicesImpl implements CursoServices {
@@ -49,6 +50,7 @@ public class CursoServicesImpl implements CursoServices {
 
     //* Methods MSVC
 
+    //* Asignar User
     @Override
     @Transactional
     public Optional<User> asignarUser(User user, Long cursoId) {
@@ -73,6 +75,7 @@ public class CursoServicesImpl implements CursoServices {
         return Optional.empty();
     }
 
+    //* Create user
     @Override
     @Transactional
     public Optional<User> createUser(User user, Long cursoId) {
@@ -97,6 +100,7 @@ public class CursoServicesImpl implements CursoServices {
         return Optional.empty();
     }
 
+    //* Delete user
     @Override
     @Transactional
     public Optional<User> deleteUser(User user, Long cursoId) {
@@ -115,6 +119,35 @@ public class CursoServicesImpl implements CursoServices {
             repository.save(curso);
 
             return Optional.of(userMsvc);
+
+        }
+
+        return Optional.empty();
+
+    }
+
+    //* Get cursos con el user
+    @Override
+    public Optional<Curso> byIdWithUser(Long id) {
+
+        Optional<Curso> o = repository.findById(id);
+
+        if (o.isPresent()) {
+
+            Curso curso = o.get();
+
+            if (!curso.getCursoUsers().isEmpty()) {
+
+                List<Long> ids = curso.getCursoUsers().stream().map(cu -> cu.getUserId())
+                        .toList();
+
+                List<User> users = clientRest.getStudentsByCourse(ids);
+
+                curso.setUsers(users);
+
+            }
+
+            return Optional.of(curso);
 
         }
 
