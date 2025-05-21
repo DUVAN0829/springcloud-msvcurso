@@ -24,4 +24,6 @@ public interface CursoServices {
 
     Optional<Curso> byIdWithUser(Long id);
 
+    void deleteCursoUserById(Long id);
+
 }

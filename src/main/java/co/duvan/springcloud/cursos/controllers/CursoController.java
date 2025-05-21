@@ -4,6 +4,7 @@ import co.duvan.springcloud.cursos.model.User;
 import co.duvan.springcloud.cursos.model.entities.Curso;
 import co.duvan.springcloud.cursos.services.CursoServices;
 import feign.FeignException;
+import feign.Response;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -166,6 +167,16 @@ public class CursoController {
         }
 
         return ResponseEntity.notFound().build();
+
+    }
+
+    //* Delete CursoUser By id
+    @DeleteMapping("delete-curso-user/{id}")
+    public ResponseEntity<?> deleteCursoUser(@PathVariable Long id) {
+
+        service.deleteCursoUserById(id);
+
+        return ResponseEntity.noContent().build();
 
     }
 

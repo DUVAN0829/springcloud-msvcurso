@@ -128,6 +128,7 @@ public class CursoServicesImpl implements CursoServices {
 
     //* Get cursos con el user
     @Override
+    @Transactional(readOnly = true)
     public Optional<Curso> byIdWithUser(Long id) {
 
         Optional<Curso> o = repository.findById(id);
@@ -155,4 +156,23 @@ public class CursoServicesImpl implements CursoServices {
 
     }
 
+    //* Delete CusrsoUser By id
+    @Override
+    public void deleteCursoUserById(Long id) {
+
+        repository.deleteCursoUserById(id);
+
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
