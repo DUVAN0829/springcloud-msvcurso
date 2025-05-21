@@ -37,9 +37,12 @@ public class CursoUser {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+
+        if (!(o instanceof CursoUser)) return false;
+
         CursoUser cursoUser = (CursoUser) o;
-        return Objects.equals(id, cursoUser.id) && Objects.equals(userId, cursoUser.userId);
+
+        return this.userId != null && this.userId.equals(cursoUser.userId);
     }
 
     @Override

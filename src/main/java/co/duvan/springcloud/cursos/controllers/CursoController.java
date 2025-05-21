@@ -107,7 +107,7 @@ public class CursoController {
     //* Methods MSVC
 
     //* Asignar user
-    @PutMapping("/asignar-user/${cursoId}")
+    @PutMapping("/asignar-user/{cursoId}")
     public ResponseEntity<?> asignarUser(@RequestBody User user, @PathVariable Long cursoId) {
 
         Optional<User> o;
@@ -128,7 +128,7 @@ public class CursoController {
     }
 
     //* Create user
-    @PostMapping("/create-user/${cursoId}")
+    @PostMapping("/create-user/{cursoId}")
     public ResponseEntity<?> createUser(@RequestBody User user, @PathVariable Long cursoId) {
 
         Optional<User> o;
@@ -149,7 +149,7 @@ public class CursoController {
     }
 
     //* Delete user
-    @DeleteMapping("/delete-user/${cursoId}")
+    @DeleteMapping("/delete-user/{cursoId}")
     public ResponseEntity<?> deleteUser(@RequestBody User user, @PathVariable Long cursoId) {
 
         Optional<User> o;
